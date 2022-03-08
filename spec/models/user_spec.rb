@@ -9,27 +9,6 @@ require 'rails_helper'
       it 'nicknameとemail,passwordとpassword_confirmation,last_name,first_name,last_name_kana,first_name_kana,birth_dateが存在すれば登録できる' do
       expect(@user).to be_valid
       end
-
-      it '名字は全角であれば登録できる' do
-      @user.last_name = '山田'
-      expect(@user).to be_valid
-      end
-
-      it '名前は全角であれば登録できる' do
-      @user.first_name = '太郎'
-      expect(@user).to be_valid 
-      end
-
-      it '名字カナは全角（カタカナ）であれば登録できる' do
-      @user.last_name_kana = 'ヤマダ'
-      expect(@user).to be_valid
-      end
-
-      it '名前カナは、全角（カタカナ）であれば登録できる' do
-      @user.first_name_kana = 'タロウ'
-      expect(@user).to be_valid
-      end
-
     end
 
     context '新規登録できないとき' do
@@ -90,13 +69,37 @@ require 'rails_helper'
       @user.password = "000000"
       @user.password_confirmation = "000000"
       @user.valid?
-      expect(@user.errors.full_messages).to include("Password Include bothletters and numbers")
+      expect(@user.errors.full_messages).to include("Password is invalid")
       end
      
       it '生年月日が空だと登録できない' do
       @user.birth_date = ""
       @user.valid?
       expect(@user.errors.full_messages).to include("Birth date can't be blank")
+      end
+
+      it '名字は空では登録できない' do
+      @user.last_name = ''
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Last name can't be blank")
+      end
+  
+      it '名前は空では登録できない' do
+      @user.first_name = ''
+      @user.valid?
+      expect(@user.errors.full_messages).to include("First name can't be blank")
+      end
+  
+      it '名字カナは空では登録できない' do
+      @user.last_name_kana = ''
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Last name kana can't be blank")
+      end
+  
+      it '名前カナは空では登録できない' do
+      @user.first_name_kana = ''
+      @user.valid?
+      expect(@user.errors.full_messages).to include("First name kana can't be blank")
       end
     end
   end
