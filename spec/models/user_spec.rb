@@ -65,13 +65,27 @@ require 'rails_helper'
       end
  
     
-      it 'passwordが半角英数字混合での入力でないと登録できない' do
+      it 'passwordが半角数字のみでは登録できない' do
       @user.password = "000000"
       @user.password_confirmation = "000000"
       @user.valid?
       expect(@user.errors.full_messages).to include("Password is invalid")
       end
      
+      it 'passwordが半角英字のみでは登録できない' do
+      @user.password = "aaaaaa"
+      @user.password_confirmation = "aaaaaa"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Password is invalid")
+      end
+
+      it 'passwordが全角では登録できない' do
+      @user.password = "ああああああ"
+      @user.password_confirmation = "ああああああ"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Password is invalid")
+      end
+
       it '生年月日が空だと登録できない' do
       @user.birth_date = ""
       @user.valid?
@@ -101,6 +115,15 @@ require 'rails_helper'
       @user.valid?
       expect(@user.errors.full_messages).to include("First name kana can't be blank")
       end
+
+      
+      #■姓・名（全角）
+      #・姓（全角）に半角文字が含まれていると登録できない
+      #・名（全角）に半角文字が含まれていると登録できない
+      #■姓・名（カナ）
+      #・姓（カナ）にカタカナ以外の文字（平仮名・漢字・英数字・記号）が含まれていると登録できない
+      #・名（カナ）にカタカナ以外の文字（平仮名・漢字・英数字・記号）が含まれていると登録できない
+
     end
   end
 end
