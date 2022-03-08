@@ -116,13 +116,29 @@ require 'rails_helper'
       expect(@user.errors.full_messages).to include("First name kana can't be blank")
       end
 
+      it '名字（全角)に半角文字が含まれていると登録できない' do
+      @user.last_name = 'aaa'
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Last name is invalid")
+      end
       
-      #■姓・名（全角）
-      #・姓（全角）に半角文字が含まれていると登録できない
-      #・名（全角）に半角文字が含まれていると登録できない
-      #■姓・名（カナ）
-      #・姓（カナ）にカタカナ以外の文字（平仮名・漢字・英数字・記号）が含まれていると登録できない
-      #・名（カナ）にカタカナ以外の文字（平仮名・漢字・英数字・記号）が含まれていると登録できない
+      it '名前(全角)に半角文字が含まれていると登録できない' do
+      @user.first_name = 'aaa'
+      @user.valid?
+      expect(@user.errors.full_messages).to include("First name is invalid")
+      end
+      
+      it '名字カナにカタカナ以外の文字（平仮名・漢字・英数字・記号）が含まれていると登録できない' do
+      @user.last_name_kana = 'あ阿a!'
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Last name kana is invalid")
+      end
+      
+      it '名前カナにカタカナ以外の文字（平仮名・漢字・英数字・記号）が含まれていると登録できない' do
+      @user.first_name_kana = 'あ阿a!'
+      @user.valid?
+      expect(@user.errors.full_messages).to include("First name kana is invalid")
+      end
 
     end
   end
