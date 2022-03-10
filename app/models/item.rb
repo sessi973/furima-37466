@@ -11,7 +11,7 @@ validates :sales_status_id, presence: true
 validates :shipping_fee_status_id, presence: true  
 validates :prefecture_id, presence: true         
 validates :scheduled_delivery_id, presence: true  
-validates :price, presence: true,                   
-validates :user, presence: true, 
+validates :price, presence: true                   
+validates :user, presence: true
 
-
+end
