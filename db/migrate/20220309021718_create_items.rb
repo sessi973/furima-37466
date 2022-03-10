@@ -1,4 +1,6 @@
 class CreateItems < ActiveRecord::Migration[6.0]
+  extend ActiveHash::Associations::ActiveRecordExtensions
+  belongs_to :category, :sales_status, :shipping_fee_status, :prefecture, :scheduled_delivery  
   def change
     create_table :items do |t|
       t.string  :name,                    null: false
