@@ -3,6 +3,7 @@ class ItemsController < ApplicationController
 
   def index
     @items = Item.all
+    #@items = ItemImage.all
   end
 
   def new
