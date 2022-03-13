@@ -12,25 +12,31 @@ class ItemsController < ApplicationController
 
   def create
     @item = Item.new(item_params)
-    if @item.save
+   if @item.save
       redirect_to root_path(@item)
-    else
-    
+   else
       render :new
+   end
+  end
+
+  def show
+    @item = Item.find(params[:id])
+  end
+
+  def edit
+    @item = Item.find(params[:id])
+  end
+
+  def update
+    @item = Item.find(params[:id])
+    @item.update(item_params)
+    if @item.save
+      redirect_to item_path(@item)
+     else
+      render :edit
     end
   end
 
-   def show
-    @item = Item.find(params[:id])
-   end
-
-   def edit
-    @item = Item.find(params[:id])
-   end
-
-   def update
-    
-   end
   private
 
   def item_params
