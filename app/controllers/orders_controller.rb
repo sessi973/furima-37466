@@ -3,9 +3,11 @@ class OrdersController < ApplicationController
  
   def index
     @order_shared = OrderShared.new
+    @item = Item.find(params[:item_id])
   end
 
   def create
+    @item = Item.find(params[:item_id])
     @order_shared = OrderShared.new(order_params)
     if @order_shared.valid?
       @order_shared.save
