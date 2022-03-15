@@ -12,9 +12,7 @@ class OrderShared
   end
   validates :prefecture_id, numericality: {other_than: 0, message: "can't be blank"}
   def save
-    # 各テーブルにデータを保存する処理を書く
    order = Order.create(item_id: item_id, user_id: user_id)
-    # 住所を保存する
    Shared.create(postal_code: postal_code, prefecture_id: prefecture_id, city: city, addresses: addresses, building: building, phone_number: phone_number, order_id: order.id)
   end
 end
