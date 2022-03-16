@@ -9,6 +9,7 @@ class OrdersController < ApplicationController
       redirect_to root_path
     end
   end
+end
 
   def create
     @order_shared = OrderShared.new(order_params)
