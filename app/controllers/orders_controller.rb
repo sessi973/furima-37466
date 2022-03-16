@@ -4,6 +4,10 @@ class OrdersController < ApplicationController
 
   def index
     @order_shared = OrderShared.new
+    if @item.order.present? 
+      current_user.id
+      redirect_to root_path
+    end
   end
 
   def create
