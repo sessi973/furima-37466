@@ -21,11 +21,11 @@ RSpec.describe OrderShared, type: :model do
     end
 
     context '購入できないとき' do
-      #it 'tokenが空では登録できない' do
-        #@order_shared.token = nil
-        #@order_shared.valid?
-        #expect(@order_shared.errors.full_messages).to include("Token can't be blank")       
-      #end
+      it 'tokenが空では登録できない' do
+        @order_shared.token = nil
+        @order_shared.valid?
+        expect(@order_shared.errors.full_messages).to include("Token can't be blank")       
+      end
       it '郵便番号が空だと登録できない' do
         @order_shared.postal_code = ''
         @order_shared.valid?
