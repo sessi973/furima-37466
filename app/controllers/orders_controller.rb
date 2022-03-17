@@ -1,15 +1,15 @@
 class OrdersController < ApplicationController
-  before_action :authenticate_user!, except: :index
+  before_action :authenticate_user!, only: :index
   before_action :set_item, only: [:index, :create ]
+  
 
   def index
     @order_shared = OrderShared.new
-    if @item.order.present? 
-      unless current_user.id
+    if current_user.id == @item.user_id || @item.order.present? 
       redirect_to root_path
     end
   end
-end
+
 
   def create
     @order_shared = OrderShared.new(order_params)
