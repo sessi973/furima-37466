@@ -2,6 +2,7 @@ require 'rails_helper'
 RSpec.describe Item, type: :model do
   before do
     @item = FactoryBot.build(:item)
+    
   end
 
   describe '出品した商品の保存' do
